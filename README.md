@@ -111,7 +111,101 @@ python comparar_resultados.py
 - **Test2.txt**: Caso intermedio con mayor complejidad
 - **Test3.txt**: Caso extenso para análisis de rendimiento
 
-## 📊 Análisis de Complejidad
+### Ejecución Manual Detallada
+
+#### Solución 1: Arreglos y Matrices con Merge Sort
+
+```powershell
+# Navegar al directorio de la solución 1
+cd "Soluciones\Solucion1_Arreglos"
+
+# Ejecutar con archivos de prueba individuales
+python solucion1.py "..\..\Contexto\Datos de entrada\Test1.txt"
+python solucion1.py "..\..\Contexto\Datos de entrada\Test2.txt"
+python solucion1.py "..\..\Contexto\Datos de entrada\Test3.txt"
+```
+
+#### Solución 2: Diccionarios con Árboles Binarios de Búsqueda
+
+```powershell
+# Navegar al directorio de la solución 2
+cd "Soluciones\Solucion2_Diccionarios"
+
+# Ejecutar con archivos de prueba individuales
+python solucion2.py "..\..\Contexto\Datos de entrada\Test1.txt"
+python solucion2.py "..\..\Contexto\Datos de entrada\Test2.txt"
+python solucion2.py "..\..\Contexto\Datos de entrada\Test3.txt"
+```
+
+#### Scripts de Prueba Automática
+
+```powershell
+# Probar ambas soluciones automáticamente (desde directorio Soluciones/)
+cd Soluciones
+python test_soluciones.py
+
+# Comparar resultados detalladamente
+python comparar_resultados.py
+```
+
+**Archivos de prueba permiten:**
+
+- Ejecutar ambas soluciones con todos los archivos de prueba
+- Medir tiempos de ejecución y mostrar estadísticas de rendimiento
+- Comparar resultados entre soluciones
+- Analizar diferencias línea por línea
+- Guardar salidas en archivos para revisión manual
+
+## Formatos de Entrada y Salida
+
+### Formato de Archivo de Entrada
+
+Los archivos de entrada deben seguir este formato:
+
+```
+Nombre1, Experticia: X, Opinión: Y
+Nombre2, Experticia: X, Opinión: Y
+...
+NombreN, Experticia: X, Opinión: Y
+
+
+{id1, id2, id3}  # Pregunta 1.1
+{id4, id5}       # Pregunta 1.2
+
+
+{id6, id7, id8}  # Pregunta 2.1
+{id9, id10}      # Pregunta 2.2
+```
+
+**Notas importantes:**
+
+- Los IDs en las preguntas corresponden a la posición del encuestado en la lista (1-indexado)
+- Las líneas vacías separan temas
+- Cada bloque de preguntas constituye un tema
+
+### Formato de Salida
+
+Ambas soluciones generan salidas idénticas en el siguiente formato:
+
+```
+Resultados de la encuesta:
+
+[X.XX] Tema N:
+ [Y.YY] Pregunta N.M: (id1, id2, ...)
+
+Lista de encuestados:
+ (id, Nombre:'...', Experticia:X, Opinión:Y)
+
+Resultados:
+  Pregunta con mayor promedio de opinion: [X.XX] Pregunta: N.M
+  Pregunta con menor promedio de opinion: [X.XX] Pregunta: N.M
+  ...
+```
+
+- **Test2.txt**: Caso intermedio con mayor complejidad
+- **Test3.txt**: Caso extenso para análisis de rendimiento
+
+## Análisis de Complejidad
 
 ### Solución 1 - Arreglos + Merge Sort
 
@@ -130,7 +224,7 @@ python comparar_resultados.py
 - **Análisis estadístico**: O(n)
 - **Complejidad total**: O(n log n) promedio, O(n²) peor caso
 
-## 🧪 Características Técnicas
+## Características Técnicas
 
 ### Implementación Manual
 
@@ -146,7 +240,7 @@ python comparar_resultados.py
 - **Análisis de rendimiento** con diferentes tamaños de entrada
 - **Verificación de correctitud** en todos los casos de prueba
 
-## 📈 Resultados y Rendimiento
+## Resultados y Rendimiento
 
 ### Comparación de Soluciones
 
@@ -160,7 +254,60 @@ python comparar_resultados.py
 - **Arreglos + Merge Sort**: Datos de gran volumen, garantía de rendimiento
 - **Diccionarios + BST**: Flexibilidad en consultas, estructuras dinámicas
 
-## 👥 Información del Proyecto
+## � Diferencias Técnicas entre Soluciones
+
+### Solución 1: Arreglos + Merge Sort
+
+- **Estructuras**: Clases con arreglos internos, matrices
+- **Ordenamiento**: Merge Sort (O(n log n) garantizado)
+- **Estabilidad**: Sí (mantiene orden relativo en empates)
+- **Memoria**: Menor uso, estructuras fijas
+- **Complejidad peor caso**: O(n log n)
+
+### Solución 2: Diccionarios + Árboles Binarios de Búsqueda (BST)
+
+- **Estructuras**: Diccionarios anidados con árboles binarios
+- **Ordenamiento**: Árbol Binario de Búsqueda (O(n log n) promedio)
+- **Estabilidad**: Depende del comparador personalizado
+- **Memoria**: Mayor flexibilidad, nodos de árbol + diccionarios
+- **Complejidad peor caso**: O(n²) (árbol degenerado)
+
+## Validación de Resultados
+
+Para validar que las soluciones funcionan correctamente:
+
+1. **Ejecutar ambas soluciones** con el mismo archivo de entrada
+2. **Comparar salidas** - deben ser idénticas o muy similares
+3. **Verificar con salidas esperadas** en `Contexto/Datos de salida/`
+4. **Revisar tiempos de ejecución** para análisis de rendimiento
+
+### Análisis de Complejidad Detallado
+
+#### Complejidad Temporal
+
+- **Solución 1**: O(n log n) en todos los casos
+- **Solución 2**: O(n log n) promedio, O(n²) peor caso
+
+#### Complejidad Espacial
+
+- **Solución 1**: O(n) para arreglos auxiliares
+- **Solución 2**: O(log n) promedio (altura del BST), O(n) peor caso
+
+## Solución de Problemas
+
+### Error: "No such file or directory"
+
+- Verificar que estás en el directorio correcto
+- Usar rutas absolutas si es necesario
+- Verificar que el archivo de entrada existe
+
+### Salidas diferentes entre soluciones
+
+- Es esperado en casos de empate (BST puede variar según comparador)
+- Verificar que los promedios y estadísticas sean iguales
+- Las diferencias deben ser solo en orden de elementos equivalentes
+
+## Información del Proyecto
 
 ### Desarrolladores
 
@@ -173,7 +320,7 @@ python comparar_resultados.py
 Para consultas sobre el proyecto, revisar:
 
 1. `Contexto/Readme.md` - Especificación completa del problema
-2. `Soluciones/INSTRUCCIONES.md` - Guía detallada de ejecución
-3. Archivos README.md en cada carpeta de solución
+2. `Contexto/Guia entrada y salida.md` - Formato de entrada y salida
+3. Archivos README.md en cada carpeta de solución (`Solucion1_Arreglos/` y `Solucion2_Diccionarios/`)
 
 ---

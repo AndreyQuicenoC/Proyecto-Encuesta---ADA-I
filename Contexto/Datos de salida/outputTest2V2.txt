@@ -1,0 +1,47 @@
+Resultados de la encuesta:
+
+[6.00] Tema 1:
+ [7.00] Pregunta 1.1: (3, 2, 20)
+ [5.00] Pregunta 1.2: (1, 9, 8)
+
+[5.08] Tema 2:
+ [5.50] Pregunta 2.1: (6, 5, 11, 4)
+ [4.67] Pregunta 2.2: (12, 7, 10)
+
+[4.96] Tema 3:
+ [5.25] Pregunta 3.2: (16, 18, 14, 17)
+ [4.67] Pregunta 3.1: (19, 15, 13)
+
+Lista de encuestados:
+ (12, Nombre:'Luis Vargas', Experticia:10, Opinión:10)
+ (3, Nombre:'Pedro Suárez', Experticia:10, Opinión:9)
+ (18, Nombre:'Felipe Mendoza', Experticia:9, Opinión:8)
+ (7, Nombre:'Pablo Castillo', Experticia:9, Opinión:4)
+ (17, Nombre:'Juan Álvarez', Experticia:8, Opinión:0)
+ (10, Nombre:'María Cano', Experticia:8, Opinión:0)
+ (2, Nombre:'Laura Jiménez', Experticia:8, Opinión:6)
+ (15, Nombre:'Ricardo Pérez', Experticia:7, Opinión:6)
+ (6, Nombre:'Marcela Gómez', Experticia:7, Opinión:8)
+ (13, Nombre:'Verónica López', Experticia:6, Opinión:1)
+ (5, Nombre:'Andrés Cárdenas', Experticia:6, Opinión:7)
+ (14, Nombre:'Daniela Torres', Experticia:5, Opinión:4)
+ (1, Nombre:'Diego Morales', Experticia:5, Opinión:8)
+ (16, Nombre:'Jessica Sandoval', Experticia:4, Opinión:9)
+ (4, Nombre:'Carolina Rojas', Experticia:4, Opinión:0)
+ (19, Nombre:'Gloria Ramírez', Experticia:3, Opinión:7)
+ (11, Nombre:'Ana Mejía', Experticia:3, Opinión:7)
+ (20, Nombre:'Héctor Orozco', Experticia:2, Opinión:6)
+ (8, Nombre:'Diana Martínez', Experticia:2, Opinión:1)
+ (9, Nombre:'Santiago Reyes', Experticia:1, Opinión:6)
+
+Resultados:
+  Pregunta con mayor promedio de opinion: [7.0] Pregunta: 1.1
+  Pregunta con menor promedio de opinion: [4.67] Pregunta: 2.2
+  Pregunta con mayor promedio de experticia: [9.0] Pregunta: 2.2
+  Pregunta con menor promedio de experticia: [2.67] Pregunta: 1.2
+  Pregunta con Mayor mediana de opinion: [7] Pregunta: 2.1
+  Pregunta con menor mediana de opinion: [4] Pregunta: 2.2
+  Pregunta con mayor moda de opinion: [7] Pregunta: 2.1
+  Pregunta con menor moda de opinion: [0] Pregunta: 2.2
+  Pregunta con mayor extremismo: [0.67] Pregunta: 2.2
+  Pregunta con mayor consenso: [0.67] Pregunta: 1.1

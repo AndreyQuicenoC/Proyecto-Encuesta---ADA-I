@@ -1,0 +1,20 @@
+Sofía García, Experticia: 1, Opinión: 6
+Alejandro Torres, Experticia: 7, Opinión: 10
+Valentina Rodríguez, Experticia: 9, Opinión: 0
+Juan López, Experticia: 10, Opinión: 1
+Martina Martínez, Experticia: 7, Opinión: 0
+Sebastián Pérez, Experticia: 8, Opinión: 9
+Camila Fernández, Experticia: 2, Opinión: 7
+Mateo González, Experticia: 4, Opinión: 7
+Isabella Díaz, Experticia: 7, Opinión: 5
+Daniel Ruiz, Experticia: 2, Opinión: 9
+Luciana Sánchez, Experticia: 1, Opinión: 7
+Lucas Vásquez, Experticia: 6, Opinión: 8
+
+
+{10, 2}
+{1, 9, 12, 6}
+
+
+{3, 4, 5}
+{11, 8, 7}

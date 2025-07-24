@@ -1,0 +1,55 @@
+Diego Morales, Experticia: 5, Opinión: 8
+Laura Jiménez, Experticia: 8, Opinión: 2
+Pedro Suárez, Experticia: 10, Opinión: 9
+Carolina Rojas, Experticia: 4, Opinión: 5
+Andrés Cárdenas, Experticia: 6, Opinión: 7
+Marcela Gómez, Experticia: 7, Opinión: 8
+Pablo Castillo, Experticia: 9, Opinión: 4
+Diana Martínez, Experticia: 2, Opinión: 0
+Santiago Reyes, Experticia: 1, Opinión: 6
+María Cano, Experticia: 8, Opinión: 2
+Ana Mejía, Experticia: 3, Opinión: 0
+Luis Vargas, Experticia: 10, Opinión: 10
+Verónica López, Experticia: 6, Opinión: 5
+Daniela Torres, Experticia: 5, Opinión: 4
+Ricardo Pérez, Experticia: 7, Opinión: 10
+Jessica Sandoval, Experticia: 4, Opinión: 9
+Juan Álvarez, Experticia: 8, Opinión: 2
+Felipe Mendoza, Experticia: 9, Opinión: 8
+Gloria Ramírez, Experticia: 3, Opinión: 7
+Héctor Orozco, Experticia: 2, Opinión: 6
+Claudia Castro, Experticia: 4, Opinión: 5
+Jorge Ramírez, Experticia: 7, Opinión: 6
+Paola Vargas, Experticia: 6, Opinión: 1
+Camilo Torres, Experticia: 5, Opinión: 3
+Sara Hernández, Experticia: 9, Opinión: 0
+Emilio Restrepo, Experticia: 3, Opinión: 10
+Adriana Lozano, Experticia: 8, Opinión: 6
+Julio Gutiérrez, Experticia: 10, Opinión: 10
+Carmen Delgado, Experticia: 6, Opinión: 5
+Óscar León, Experticia: 7, Opinión: 8
+Fernanda Molina, Experticia: 8, Opinión: 9
+Mateo Castaño, Experticia: 4, Opinión: 0
+Daniel Fuentes, Experticia: 3, Opinión: 7
+Gabriela Ortiz, Experticia: 9, Opinión: 8
+Natalia Valencia, Experticia: 2, Opinión: 3
+Esteban Peña, Experticia: 1, Opinión: 5
+Lorena Beltrán, Experticia: 5, Opinión: 6
+Santiago Acosta, Experticia: 6, Opinión: 4
+Manuela Vargas, Experticia: 7, Opinión: 1
+Sebastián Paredes, Experticia: 8, Opinión: 9
+
+
+{25, 35, 34, 29}
+{3, 15, 1, 2, 23}
+{27, 8, 39}
+
+
+{24, 10, 16, 12}
+{31, 22, 7, 20, 13}
+{4, 17, 40, 26, 32, 9}
+
+
+{5, 33, 18, 19, 28, 38}
+{11, 21, 14, 37}
+{36, 6, 30}

@@ -1,0 +1,70 @@
+Resultados de la encuesta:
+
+[5.97] Tema 3:
+ [7.17] Pregunta 3.1: (28, 18, 5, 19, 33, 38)
+ [7.00] Pregunta 3.3: (6, 30, 36)
+ [3.75] Pregunta 3.2: (37, 21, 14, 11)
+
+[5.78] Tema 2:
+ [6.00] Pregunta 2.1: (12, 16, 24, 10)
+ [6.00] Pregunta 2.2: (31, 22, 20, 13, 7)
+ [5.33] Pregunta 2.3: (26, 40, 9, 4, 17, 32)
+
+[4.11] Tema 1:
+ [6.00] Pregunta 1.2: (15, 3, 1, 2, 23)
+ [4.00] Pregunta 1.1: (34, 29, 35, 25)
+ [2.33] Pregunta 1.3: (27, 39, 8)
+
+Lista de encuestados:
+ (28, Nombre:'Julio Gutiérrez', Experticia:10, Opinión:10)
+ (12, Nombre:'Luis Vargas', Experticia:10, Opinión:10)
+ (3, Nombre:'Pedro Suárez', Experticia:10, Opinión:9)
+ (34, Nombre:'Gabriela Ortiz', Experticia:9, Opinión:8)
+ (25, Nombre:'Sara Hernández', Experticia:9, Opinión:0)
+ (18, Nombre:'Felipe Mendoza', Experticia:9, Opinión:8)
+ (7, Nombre:'Pablo Castillo', Experticia:9, Opinión:4)
+ (40, Nombre:'Sebastián Paredes', Experticia:8, Opinión:9)
+ (31, Nombre:'Fernanda Molina', Experticia:8, Opinión:9)
+ (27, Nombre:'Adriana Lozano', Experticia:8, Opinión:6)
+ (17, Nombre:'Juan Álvarez', Experticia:8, Opinión:2)
+ (10, Nombre:'María Cano', Experticia:8, Opinión:2)
+ (2, Nombre:'Laura Jiménez', Experticia:8, Opinión:2)
+ (39, Nombre:'Manuela Vargas', Experticia:7, Opinión:1)
+ (30, Nombre:'Óscar León', Experticia:7, Opinión:8)
+ (22, Nombre:'Jorge Ramírez', Experticia:7, Opinión:6)
+ (15, Nombre:'Ricardo Pérez', Experticia:7, Opinión:10)
+ (6, Nombre:'Marcela Gómez', Experticia:7, Opinión:8)
+ (38, Nombre:'Santiago Acosta', Experticia:6, Opinión:4)
+ (29, Nombre:'Carmen Delgado', Experticia:6, Opinión:5)
+ (23, Nombre:'Paola Vargas', Experticia:6, Opinión:1)
+ (13, Nombre:'Verónica López', Experticia:6, Opinión:5)
+ (5, Nombre:'Andrés Cárdenas', Experticia:6, Opinión:7)
+ (37, Nombre:'Lorena Beltrán', Experticia:5, Opinión:6)
+ (24, Nombre:'Camilo Torres', Experticia:5, Opinión:3)
+ (14, Nombre:'Daniela Torres', Experticia:5, Opinión:4)
+ (1, Nombre:'Diego Morales', Experticia:5, Opinión:8)
+ (32, Nombre:'Mateo Castaño', Experticia:4, Opinión:0)
+ (21, Nombre:'Claudia Castro', Experticia:4, Opinión:5)
+ (16, Nombre:'Jessica Sandoval', Experticia:4, Opinión:9)
+ (4, Nombre:'Carolina Rojas', Experticia:4, Opinión:5)
+ (33, Nombre:'Daniel Fuentes', Experticia:3, Opinión:7)
+ (26, Nombre:'Emilio Restrepo', Experticia:3, Opinión:10)
+ (19, Nombre:'Gloria Ramírez', Experticia:3, Opinión:7)
+ (11, Nombre:'Ana Mejía', Experticia:3, Opinión:0)
+ (35, Nombre:'Natalia Valencia', Experticia:2, Opinión:3)
+ (20, Nombre:'Héctor Orozco', Experticia:2, Opinión:6)
+ (8, Nombre:'Diana Martínez', Experticia:2, Opinión:0)
+ (36, Nombre:'Esteban Peña', Experticia:1, Opinión:5)
+ (9, Nombre:'Santiago Reyes', Experticia:1, Opinión:6)
+
+Resultados:
+  Pregunta con mayor promedio de opinion: [7.17] Pregunta: 3.1
+  Pregunta con menor promedio de opinion: [2.33] Pregunta: 1.3
+  Pregunta con mayor promedio de experticia: [7.20] Pregunta: 1.2
+  Pregunta con menor promedio de experticia: [4.25] Pregunta: 3.2
+  Pregunta con Mayor mediana de opinion: [8] Pregunta: 1.2
+  Pregunta con menor mediana de opinion: [1] Pregunta: 1.3
+  Pregunta con mayor moda de opinion: [8] Pregunta: 3.3
+  Pregunta con menor moda de opinion: [0] Pregunta: 1.1
+  Pregunta con mayor extremismo: [0.33] Pregunta: 1.3
+  Pregunta con mayor consenso: [0.67] Pregunta: 3.3

@@ -53,41 +53,41 @@ def main():
     
     # Verificar que existan las soluciones
     if not os.path.exists(solucion1_path):
-        print(f"❌ Error: No se encontró {solucion1_path}")
+        print(f"Error: No se encontró {solucion1_path}")
         return
     
     if not os.path.exists(solucion2_path):
-        print(f"❌ Error: No se encontró {solucion2_path}")
+        print(f"Error: No se encontró {solucion2_path}")
         return
     
     # Ejecutar pruebas
     for i, archivo in enumerate(archivos_prueba, 1):
         if not os.path.exists(archivo):
-            print(f"⚠️  Archivo de prueba {archivo} no encontrado, saltando...")
+            print(f"Archivo de prueba {archivo} no encontrado, saltando...")
             continue
         
-        print(f"📝 PRUEBA {i}: {os.path.basename(archivo)}")
+        print(f"PRUEBA {i}: {os.path.basename(archivo)}")
         print("-" * 60)
         
         # Ejecutar Solución 1
-        print("🔄 Ejecutando Solución 1 (Arreglos + Merge Sort)...")
+        print("Ejecutando Solución 1 (Arreglos + Merge Sort)...")
         salida1, tiempo1, error1 = ejecutar_solucion(solucion1_path, archivo)
         
         if error1:
-            print(f"❌ Error en Solución 1: {error1}")
+            print(f"Error en Solución 1: {error1}")
             tiempo1 = None
         else:
-            print(f"✅ Solución 1 completada en {tiempo1:.4f} segundos")
+            print(f"Solución 1 completada en {tiempo1:.4f} segundos")
         
         # Ejecutar Solución 2
-        print("🔄 Ejecutando Solución 2 (Diccionarios + BST)...")
+        print("Ejecutando Solución 2 (Diccionarios + BST)...")
         salida2, tiempo2, error2 = ejecutar_solucion(solucion2_path, archivo)
         
         if error2:
-            print(f"❌ Error en Solución 2: {error2}")
+            print(f"Error en Solución 2: {error2}")
             tiempo2 = None
         else:
-            print(f"✅ Solución 2 completada en {tiempo2:.4f} segundos")
+            print(f"Solución 2 completada en {tiempo2:.4f} segundos")
         
         # Guardar datos para el resumen final
         nombres_archivos.append(os.path.basename(archivo))
@@ -110,8 +110,8 @@ def main():
                     else:
                         print("⚡ Ambas soluciones tienen tiempos similares")
             else:
-                print("❌ Las salidas de las soluciones son diferentes")
-                print("\n🔍 Primeras diferencias encontradas:")
+                print("Las salidas de las soluciones son diferentes")
+                print("\nPrimeras diferencias encontradas:")
                 lineas1 = salida1.strip().split('\\n')
                 lineas2 = salida2.strip().split('\\n')
                 
@@ -124,7 +124,7 @@ def main():
         
         # Mostrar una muestra de la salida
         if salida1:
-            print("\\n📄 Muestra de salida (primeras 10 líneas):")
+            print("\\nMuestra de salida (primeras 10 líneas):")
             lineas = salida1.strip().split('\\n')
             for j, linea in enumerate(lineas[:10]):
                 print(f"  {j+1:2}: {linea}")
@@ -134,7 +134,7 @@ def main():
         print("\\n" + "=" * 80 + "\\n")
     
     # RESUMEN FINAL DE RENDIMIENTO
-    print("📊 RESUMEN FINAL DE RENDIMIENTO")
+    print("RESUMEN FINAL DE RENDIMIENTO")
     print("=" * 80)
     
     # Filtrar tiempos válidos
@@ -153,12 +153,12 @@ def main():
                 
                 if t1 < t2:
                     diferencia = ((t2 - t1) / t1) * 100
-                    print(f"  🥇 Sol1 +{diferencia:.1f}%")
+                    print(f"  Sol1 +{diferencia:.1f}%")
                 elif t2 < t1:
                     diferencia = ((t1 - t2) / t2) * 100
-                    print(f"  🥇 Sol2 +{diferencia:.1f}%")
+                    print(f"  Sol2 +{diferencia:.1f}%")
                 else:
-                    print("  🤝 Empate")
+                    print("  Empate")
         
         # Estadísticas generales
         tiempo_total_sol1 = sum(tiempos_validos_sol1)
@@ -166,7 +166,7 @@ def main():
         tiempo_promedio_sol1 = tiempo_total_sol1 / len(tiempos_validos_sol1)
         tiempo_promedio_sol2 = tiempo_total_sol2 / len(tiempos_validos_sol2)
         
-        print("\\n📊 Estadísticas generales:")
+        print("\\nEstadísticas generales:")
         print("-" * 50)
         print(f"  Solución 1 (Arreglos + Merge Sort):")
         print(f"    • Tiempo total:    {tiempo_total_sol1:.4f}s")
@@ -181,36 +181,31 @@ def main():
         print(f"    • Tiempo máximo:   {max(tiempos_validos_sol2):.4f}s")
         
         # Ganador general
-        print("\\n🏆 VEREDICTO FINAL:")
+        print("\\nVEREDICTO FINAL:")
         print("-" * 50)
         if tiempo_promedio_sol1 < tiempo_promedio_sol2:
             mejora = ((tiempo_promedio_sol2 - tiempo_promedio_sol1) / tiempo_promedio_sol1) * 100
-            print(f"🥇 Solución 1 (Arreglos + Merge Sort) es {mejora:.1f}% más rápida en promedio")
-            print("   ✅ Merge Sort muestra mejor rendimiento general")
+            print(f"Solución 1 (Arreglos + Merge Sort) es {mejora:.1f}% más rápida en promedio")
+            print("   Merge Sort muestra mejor rendimiento general")
         elif tiempo_promedio_sol2 < tiempo_promedio_sol1:
             mejora = ((tiempo_promedio_sol1 - tiempo_promedio_sol2) / tiempo_promedio_sol2) * 100
-            print(f"🥇 Solución 2 (Diccionarios + BST) es {mejora:.1f}% más rápida en promedio")
-            print("   ✅ BST muestra mejor rendimiento general")
+            print(f"Solución 2 (Diccionarios + BST) es {mejora:.1f}% más rápida en promedio")
+            print("   BST muestra mejor rendimiento general")
         else:
-            print("🤝 Ambas soluciones tienen rendimiento similar")
-            print("   ⚖️  Ambos algoritmos son eficientes para este problema")
+            print("Ambas soluciones tienen rendimiento similar")
+            print("   Ambos algoritmos son eficientes para este problema")
         
         # Análisis técnico
-        print("\\n🔬 ANÁLISIS TÉCNICO:")
+        print("\\nANÁLISIS TÉCNICO:")
         print("-" * 50)
         print("  • Merge Sort:     O(n log n) garantizado, estable")
         print("  • BST:           O(n log n) promedio, O(n²) peor caso")
-        print("  • Diferencias menores son normales debido a:")
-        print("    - Overhead de estructuras de datos diferentes")
-        print("    - Variaciones en estabilidad de algoritmos")
-        print("    - Optimizaciones específicas del intérprete Python")
-    
     else:
-        print("\\n⚠️  No se pudieron recopilar suficientes datos de tiempo para el resumen")
+        print("\\n  No se pudieron recopilar suficientes datos de tiempo para el resumen")
     
     print("\\n" + "=" * 80)
-    print("🎉 Pruebas completadas!")
-    print("\\n💡 Para ver la salida completa de una solución específica, ejecuta:")
+    print("Pruebas completadas!")
+    print("\\nPara ver la salida completa de una solución específica, ejecuta:")
     print(f"   python {solucion1_path} <archivo_entrada>")
     print(f"   python {solucion2_path} <archivo_entrada>")
 

@@ -55,7 +55,8 @@ class Pregunta:
         n = len(opiniones_ordenadas)
         
         if n % 2 == 0:
-            return (opiniones_ordenadas[n//2 - 1] + opiniones_ordenadas[n//2]) / 2
+            # Si hay empate (n par), se elige la mediana de menor valor según los requisitos
+            return opiniones_ordenadas[n//2 - 1]
         else:
             return opiniones_ordenadas[n//2]
     

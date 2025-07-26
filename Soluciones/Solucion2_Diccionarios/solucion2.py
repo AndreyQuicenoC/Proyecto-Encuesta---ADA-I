@@ -50,7 +50,7 @@ class NodoArbol:
         """Recorrido en orden del árbol (retorna elementos ordenados)"""
         if self.izquierdo:
             self.izquierdo.recorrido_inorden(resultado)
-        resultado.append((self.clave, self.valor))
+        resultado[self.clave] = self.valor
         if self.derecho:
             self.derecho.recorrido_inorden(resultado)
 
@@ -72,15 +72,10 @@ class ArbolBST:
         if self.raiz is None:
             return {}
         
-        resultado = []
+        resultado = {}
         self.raiz.recorrido_inorden(resultado)
         
-        # Convertir a diccionario manteniendo orden
-        dict_ordenado = {}
-        for clave, valor in resultado:
-            dict_ordenado[clave] = valor
-        
-        return dict_ordenado
+        return resultado
 
 
 # ----------------- FUNCIONES PARA CREAR ESTRUCTURAS DE DATOS -----------------
@@ -144,13 +139,7 @@ def calcular_estadisticas_pregunta(pregunta):
     promedio_experticia = suma_experticia / len(experticías)
     
     # Mediana de opinión
-    opiniones_lista = list(opiniones.values())
-    opiniones_ordenadas = ordenar_con_arbol_simple(opiniones_lista)
-    n = len(opiniones_ordenadas)
-    if n % 2 == 0:
-        mediana = (opiniones_ordenadas[n//2 - 1] + opiniones_ordenadas[n//2]) / 2
-    else:
-        mediana = opiniones_ordenadas[n//2]
+    mediana = calcular_mediana_con_bst(opiniones)
     
     # Moda de opinión
     frecuencias = {}
@@ -216,10 +205,46 @@ def calcular_estadisticas_tema(tema):
 
 
 # ----------------- FUNCIONES PARA ORDENAMIENTO CON ÁRBOL BINARIO DE BÚSQUEDA -----------------
-def ordenar_con_arbol_simple(arr):
-    """Ordena una lista simple - usar algoritmo directo para simplificar"""
-    # Para mediana, usar ordenamiento simple y eficiente
-    return sorted(arr)
+def calcular_mediana_con_bst(opiniones_dict):
+    """Calcula mediana usando BST sin convertir a lista"""
+    if len(opiniones_dict) == 0:
+        return 0
+    
+    # Crear BST para ordenar opiniones
+    arbol = ArbolBST()
+    frecuencias = {}
+    
+    # Contar frecuencias y construir BST
+    for opinion in opiniones_dict.values():
+        if opinion in frecuencias:
+            frecuencias[opinion] += 1
+        else:
+            frecuencias[opinion] = 1
+            arbol.insertar(opinion, opinion)
+    
+    # Obtener valores ordenados
+    valores_ordenados = arbol.obtener_ordenado()
+    
+    # Expandir según frecuencias para encontrar mediana
+    total_elementos = len(opiniones_dict)
+    if total_elementos % 2 == 1:  # Impar - posición central
+        posicion_mediana = total_elementos // 2
+    else:  # Par - posición del menor de los dos centrales  
+        posicion_mediana = total_elementos // 2 - 1
+    
+    contador = 0
+    for valor in valores_ordenados.keys():
+        contador += frecuencias[valor]
+        if total_elementos % 2 == 1:  # Impar
+            if contador > posicion_mediana:
+                return valor
+        else:  # Par
+            if contador > posicion_mediana:
+                return valor
+    
+    # Fallback usando next() para obtener primera clave sin list()
+    # Caso por defecto
+    return next(iter(valores_ordenados.keys())) if valores_ordenados else 0
 
 def bst_encuestados_pregunta(encuestados_dict):
     """BST para encuestados en una pregunta (descendente por opinión, luego experticia)"""
@@ -455,67 +480,70 @@ def procesar_encuesta(ruta_archivo):
     encuestados_ordenados = bst_todos_encuestados(encuestados)
     
     # Generar salida
-    resultado = []
-    resultado.append("Resultados de la encuesta:")
-    resultado.append("")
+    resultado = "Resultados de la encuesta:\n\n"
     
     # Mostrar temas y preguntas
     for tema_id, tema in temas.items():
         promedio_tema = tema['estadisticas']['promedio_total_opinion']
-        resultado.append(f"[{promedio_tema:.2f}] Tema {tema_id}:")
+        resultado += f"[{promedio_tema:.2f}] Tema {tema_id}:\n"
         
         for pregunta_id, pregunta in tema['preguntas'].items():
             promedio_pregunta = pregunta['estadisticas']['promedio_opinion']
-            ids_encuestados = [str(id_enc) for id_enc in pregunta['encuestados'].keys()]
-            resultado.append(f" [{promedio_pregunta:.2f}] Pregunta {tema_id}.{pregunta_id}: ({', '.join(ids_encuestados)})")
+            # Usar diccionario para construir string de IDs
+            ids_str = ""
+            for i, id_enc in enumerate(pregunta['encuestados'].keys()):
+                if i > 0:
+                    ids_str += ", "
+                ids_str += str(id_enc)
+            resultado += f" [{promedio_pregunta:.2f}] Pregunta {tema_id}.{pregunta_id}: ({ids_str})\n"
         
-        resultado.append("")
+        resultado += "\n"
     
     # Lista de encuestados
-    resultado.append("Lista de encuestados:")
+    resultado += "Lista de encuestados:\n"
     for id_enc, encuestado in encuestados_ordenados.items():
-        resultado.append(f" ({id_enc}, Nombre:'{encuestado['nombre']}', Experticia:{encuestado['experticia']}, Opinión:{encuestado['opinion']})")
+        resultado += f" ({id_enc}, Nombre:'{encuestado['nombre']}', Experticia:{encuestado['experticia']}, Opinión:{encuestado['opinion']})\n"
     
-    resultado.append("")
+    resultado += "\n"
     
     # Análisis estadístico
-    resultado.append("Resultados:")
+    resultado += "Resultados:\n"
     
     # Mayor y menor promedio de opinión
     max_prom_op, max_tema, max_preg = encontrar_pregunta_extrema(temas, "promedio_opinion", True)
     min_prom_op, min_tema, min_preg = encontrar_pregunta_extrema(temas, "promedio_opinion", False)
-    resultado.append(f"  Pregunta con mayor promedio de opinion: [{max_prom_op:.2f}] Pregunta: {max_tema}.{max_preg}")
-    resultado.append(f"  Pregunta con menor promedio de opinion: [{min_prom_op:.2f}] Pregunta: {min_tema}.{min_preg}")
+    resultado += f"  Pregunta con mayor promedio de opinion: [{max_prom_op:.2f}] Pregunta: {max_tema}.{max_preg}\n"
+    resultado += f"  Pregunta con menor promedio de opinion: [{min_prom_op:.2f}] Pregunta: {min_tema}.{min_preg}\n"
     
     # Mayor y menor promedio de experticia
     max_prom_exp, max_tema_exp, max_preg_exp = encontrar_pregunta_extrema(temas, "promedio_experticia", True)
     min_prom_exp, min_tema_exp, min_preg_exp = encontrar_pregunta_extrema(temas, "promedio_experticia", False)
-    resultado.append(f"  Pregunta con mayor promedio de experticia: [{max_prom_exp:.2f}] Pregunta: {max_tema_exp}.{max_preg_exp}")
-    resultado.append(f"  Pregunta con menor promedio de experticia: [{min_prom_exp:.2f}] Pregunta: {min_tema_exp}.{min_preg_exp}")
+    resultado += f"  Pregunta con mayor promedio de experticia: [{max_prom_exp:.2f}] Pregunta: {max_tema_exp}.{max_preg_exp}\n"
+    resultado += f"  Pregunta con menor promedio de experticia: [{min_prom_exp:.2f}] Pregunta: {min_tema_exp}.{min_preg_exp}\n"
     
     # Mayor y menor mediana
     max_med, max_tema_med, max_preg_med = encontrar_pregunta_extrema(temas, "mediana", True)
     min_med, min_tema_med, min_preg_med = encontrar_pregunta_extrema(temas, "mediana", False)
-    resultado.append(f"  Pregunta con Mayor mediana de opinion: [{max_med:.8g}] Pregunta: {max_tema_med}.{max_preg_med}")
-    resultado.append(f"  Pregunta con menor mediana de opinion: [{min_med:.8g}] Pregunta: {min_tema_med}.{min_preg_med}")
+    resultado += f"  Pregunta con Mayor mediana de opinion: [{max_med:.8g}] Pregunta: {max_tema_med}.{max_preg_med}\n"
+    resultado += f"  Pregunta con menor mediana de opinion: [{min_med:.8g}] Pregunta: {min_tema_med}.{min_preg_med}\n"
     
     # Mayor y menor moda
     max_moda, max_tema_moda, max_preg_moda = encontrar_pregunta_extrema(temas, "moda", True)
     min_moda, min_tema_moda, min_preg_moda = encontrar_pregunta_extrema(temas, "moda", False)
-    resultado.append(f"  Pregunta con mayor moda de opinion: [{max_moda:.8g}] Pregunta: {max_tema_moda}.{max_preg_moda}")
-    resultado.append(f"  Pregunta con menor moda de opinion: [{min_moda:.8g}] Pregunta: {min_tema_moda}.{min_preg_moda}")
+    resultado += f"  Pregunta con mayor moda de opinion: [{max_moda:.8g}] Pregunta: {max_tema_moda}.{max_preg_moda}\n"
+    resultado += f"  Pregunta con menor moda de opinion: [{min_moda:.8g}] Pregunta: {min_tema_moda}.{min_preg_moda}\n"
     
     # Mayor extremismo
     max_ext, max_tema_ext, max_preg_ext = encontrar_pregunta_extrema(temas, "extremismo", True)
-    resultado.append(f"  Pregunta con mayor extremismo: [{max_ext:.2g}] Pregunta: {max_tema_ext}.{max_preg_ext}")
+    resultado += f"  Pregunta con mayor extremismo: [{max_ext:.2g}] Pregunta: {max_tema_ext}.{max_preg_ext}\n"
     
     # Mayor consenso
     max_cons, max_tema_cons, max_preg_cons = encontrar_pregunta_extrema(temas, "consenso", True)
-    resultado.append(f"  Pregunta con mayor consenso: [{max_cons:.2f}] Pregunta: {max_tema_cons}.{max_preg_cons}")
+    resultado += f"  Pregunta con mayor consenso: [{max_cons:.2f}] Pregunta: {max_tema_cons}.{max_preg_cons}\n"
     
-    resultado.append("")
+    resultado += "\n"
     
-    return '\n'.join(resultado)
+    return resultado
 
 
 # ----------------- FUNCIONES PRINCIPALES -----------------

@@ -2,7 +2,7 @@
 
 ## Descripción de la Solución
 
-Esta solución utiliza **diccionarios como estructura de datos principal** combinada con **Árboles Binarios de Búsqueda (BST)** para implementar todos los requerimientos de ordenamiento del problema.
+Esta solución implementa el procesamiento de encuestas utilizando **diccionarios y árboles binarios de búsqueda (BST)** como estructuras de datos principales para almacenar, procesar y ordenar la información.
 
 ## Estructuras de Datos Utilizadas
 
@@ -30,32 +30,29 @@ Esta solución utiliza **diccionarios como estructura de datos principal** combi
 - **Clase NodoArbol**: Representa cada nodo del árbol con clave, valor y comparador personalizado
 - **Clase ArbolBST**: Implementa el árbol con métodos de inserción y recorrido
 - **Comparadores personalizados**: Funciones específicas para cada tipo de ordenamiento
-- **Recorrido in-orden**: Para obtener elementos ordenados según el criterio del comparador
+- **Recorrido in-orden**: Obtiene elementos ordenados según el criterio especificado
 
-## Algoritmos Implementados
+## Algoritmos de Ordenamiento
 
-### 1. Árbol Binario de Búsqueda (Complejidad Promedio: O(n log n), Peor Caso: O(n²))
-
-Se implementaron BST personalizados para cada tipo de ordenamiento:
+### 1. BST Especializados por Tipo de Ordenamiento
 
 #### a) `bst_encuestados_pregunta()`
 - **Propósito**: Ordenar encuestados dentro de una pregunta
 - **Criterios**: Descendente por opinión, luego por experticia
-- **Implementación**: BST con comparador personalizado
 
 #### b) `bst_preguntas()`
-- **Propósito**: Ordenar preguntas dentro de un tema  
+- **Propósito**: Ordenar preguntas dentro de un tema
 - **Criterios**: Descendente por promedio de opinión, luego promedio de experticia, luego número de encuestados
 
 #### c) `bst_temas()`
-- **Propósito**: Ordenar temas
-- **Criterios**: Descendente por promedio de promedios de opinión, luego experticia, luego total de encuestados
+- **Propósito**: Ordenar temas en el resultado final
+- **Criterios**: Descendente por promedio total de opinión, luego experticia promedio, luego total de encuestados
 
 #### d) `bst_todos_encuestados()`
 - **Propósito**: Ordenar lista general de encuestados
-- **Criterios**: Descendente por experticia, luego por id (mayor primero)
+- **Criterios**: Descendente por experticia, luego por ID
 
-### 2. Implementación de BST con Comparadores Personalizados
+### 2. Implementación de BST con Comparadores
 
 ```python
 class NodoArbol:
@@ -68,7 +65,6 @@ class NodoArbol:
     
     def insertar(self, clave, valor):
         if self.comparador:
-            # Usar comparador personalizado
             if self.comparador(valor, self.valor):
                 # Insertar a la izquierda
             else:
@@ -77,63 +73,123 @@ class NodoArbol:
             # Comparación estándar por clave
     
     def recorrido_inorden(self, resultado):
-        # Recorrido que mantiene el orden según el comparador
+        # Recorrido que retorna elementos ordenados
+        if self.izquierdo:
+            self.izquierdo.recorrido_inorden(resultado)
+        resultado[self.clave] = self.valor
+        if self.derecho:
+            self.derecho.recorrido_inorden(resultado)
 ```
 
-### 3. Algoritmos de Cálculo Estadístico
+## Cálculos Estadísticos
 
-#### Cálculo de Mediana con BST (O(n log n))
+### 1. Mediana con BST
 ```python
-opiniones_lista = list(opiniones.values())
-opiniones_ordenadas = ordenar_con_arbol_simple(opiniones_lista)
-n = len(opiniones_ordenadas)
-if n % 2 == 0:
-    mediana = (opiniones_ordenadas[n//2 - 1] + opiniones_ordenadas[n//2]) / 2
-else:
-    mediana = opiniones_ordenadas[n//2]
+def calcular_mediana_con_bst(opiniones_dict):
+    # Crear BST para ordenar opiniones
+    arbol = ArbolBST()
+    frecuencias = {}
+    
+    # Construir BST con frecuencias
+    for opinion in opiniones_dict.values():
+        if opinion in frecuencias:
+            frecuencias[opinion] += 1
+        else:
+            frecuencias[opinion] = 1
+            arbol.insertar(opinion, opinion)
+    
+    # Obtener valores ordenados y calcular mediana
+    valores_ordenados = arbol.obtener_ordenado()
+    total_elementos = len(opiniones_dict)
+    
+    # Calcular posición de mediana
+    if total_elementos % 2 == 1:
+        posicion_mediana = total_elementos // 2
+    else:
+        posicion_mediana = total_elementos // 2 - 1
+    
+    # Encontrar elemento en posición de mediana
+    contador = 0
+    for valor in valores_ordenados.keys():
+        contador += frecuencias[valor]
+        if contador > posicion_mediana:
+            return valor
 ```
 
-#### Cálculo de Moda con Diccionario de Frecuencias (O(n))
+### 2. Moda con Diccionario de Frecuencias
 ```python
 frecuencias = {}
-for op in opiniones.values():
-    if op in frecuencias:
-        frecuencias[op] += 1
+for opinion in opiniones.values():
+    if opinion in frecuencias:
+        frecuencias[opinion] += 1
     else:
-        frecuencias[op] = 1
+        frecuencias[opinion] = 1
 
 max_frecuencia = max(frecuencias.values())
 moda = None
 for valor, freq in frecuencias.items():
     if freq == max_frecuencia:
-        if moda is None or valor > moda:
+        if moda is None or valor < moda:
             moda = valor
+```
+
+### 3. Otros Cálculos
+- **Promedio**: Suma de valores dividida por cantidad
+- **Extremismo**: Porcentaje de opiniones en valores 0 o 10
+- **Consenso**: Porcentaje de encuestados con la moda de opinión
+
+## Procesamiento de Archivos
+
+### Lectura de Datos
+```python
+def leer_archivo_entrada(ruta_archivo):
+    # Leer y procesar líneas del archivo
+    with open(ruta_archivo, 'r', encoding='utf-8') as archivo:
+        lineas = archivo.readlines()
+    
+    # Procesar encuestados y estructura de preguntas
+    # Crear diccionarios de encuestados y temas
+    # Retornar estructuras de datos organizadas
 ```
 
 ## Complejidad Computacional
 
-### Análisis por Operación:
+### Análisis por Operación
 1. **Lectura de datos**: O(n) donde n = total de encuestados
 2. **Cálculo de estadísticas**: O(n) para cada pregunta
-3. **Construcción del BST**: O(n log n) promedio, O(n²) peor caso (árbol degenerado)
+3. **Construcción del BST**: O(n log n) promedio, O(n²) peor caso
 4. **Recorrido in-orden**: O(n) para obtener elementos ordenados
+5. **Ordenamiento total**: O(n log n + m² log m + k log k)
 
-### Complejidad Promedio Total: O(n log n + m² log m + k log k)
-### Complejidad Peor Caso: O(n² + m³ + k²)
+Donde:
+- **n**: Total de encuestados
+- **m**: Promedio de preguntas por tema
+- **k**: Número de temas
+
+### Complejidad Total
+- **Caso promedio**: O(n log n)
+- **Peor caso**: O(n²) cuando los BST degeneran
 
 ## Ventajas de la Implementación
 
-1. **Ordenamiento natural**: Los BST mantienen elementos ordenados automáticamente
-2. **Flexibilidad**: Comparadores personalizados permiten diferentes criterios de ordenamiento
-3. **Estructura híbrida**: Combina la flexibilidad de diccionarios con el ordenamiento de árboles
-4. **Eficiencia en promedio**: O(n log n) para la mayoría de casos
+1. **Flexibilidad**: Comparadores personalizados para diferentes criterios de ordenamiento
+2. **Estructuras dinámicas**: Los BST se construyen y ordenan automáticamente
+3. **Acceso eficiente**: Diccionarios permiten acceso directo por clave
+4. **Ordenamiento natural**: Los BST mantienen elementos ordenados durante la inserción
+5. **Escalabilidad**: Maneja eficientemente datasets de diferentes tamaños
 
-## Características Específicas de los BST
+## Criterios de Ordenamiento y Desempate
 
-1. **Comparadores personalizados**: Cada BST usa una función específica para determinar el orden
-2. **Recorrido in-orden**: Garantiza que los elementos se obtengan en el orden deseado
-3. **Inserción dinámica**: Los elementos se insertan y ordenan automáticamente
-4. **Balance no garantizado**: Puede degenerar en O(n²) con datos ya ordenados
+### Ordenamiento de Elementos
+- **Encuestados en pregunta**: Por opinión (desc), luego experticia (desc)
+- **Preguntas en tema**: Por promedio opinión (desc), luego experticia (desc), luego cantidad
+- **Temas**: Por promedio total opinión (desc), luego experticia (desc), luego total encuestados
+- **Lista general**: Por experticia (desc), luego ID (desc)
+
+### Manejo de Empates
+- **Mediana**: En caso de número par de elementos, se toma el menor de los dos valores centrales
+- **Moda**: En caso de empate de frecuencias, se selecciona el menor valor
+- **Preguntas**: En empate de estadísticas, se elige la pregunta con menor identificador
 
 ## Instrucciones de Ejecución
 
@@ -146,24 +202,25 @@ python solucion2.py <archivo_entrada>
 python solucion2.py "../../Contexto/Datos de entrada/Test1.txt"
 ```
 
-## Comparación con Solución 1
-
-| Aspecto | Solución 1 (Merge Sort + Arreglos) | Solución 2 (BST + Diccionarios) |
-|---------|-------------------------------------|----------------------------------|
-| **Estructura de datos** | Arreglos y matrices | Diccionarios y árboles binarios |
-| **Algoritmo de ordenamiento** | Merge Sort | Árbol Binario de Búsqueda |
-| **Complejidad promedio** | O(n log n) | O(n log n) |
-| **Complejidad peor caso** | O(n log n) | O(n²) |
-| **Estabilidad** | Sí | Depende del comparador |
-| **Uso de memoria** | Menor | Moderado (nodos de árbol) |
-| **Acceso a datos** | Secuencial (índices) | Directo (claves) + Ordenado (BST) |
-| **Flexibilidad** | Menor | Mayor (comparadores personalizados) |
-
 ## Archivos de Prueba Soportados
 
-La solución funciona con todos los archivos de prueba del proyecto:
+La solución procesa correctamente todos los archivos de prueba del proyecto:
 - Test1.txt
-- Test2.txt  
+- Test2.txt
 - Test3.txt
+- Test4.txt
+- Test5.txt  
+- Test6.txt
 
-Y genera salidas en el formato especificado en la guía del proyecto.
+Generando salidas en el formato especificado en la guía del proyecto.
+
+## Comparación con Otros Enfoques
+
+| Aspecto | Merge Sort + Arreglos | BST + Diccionarios |
+|---------|----------------------|-------------------|
+| **Complejidad promedio** | O(n log n) garantizado | O(n log n) promedio |
+| **Complejidad peor caso** | O(n log n) | O(n²) |
+| **Flexibilidad ordenamiento** | Media | Alta |
+| **Acceso a datos** | Secuencial | Directo por clave |
+| **Uso de memoria** | Menor | Moderado |
+| **Estabilidad** | Sí | Configurable |

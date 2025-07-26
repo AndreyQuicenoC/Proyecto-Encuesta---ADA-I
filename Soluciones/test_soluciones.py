@@ -38,7 +38,11 @@ def main():
     archivos_prueba = [
         os.path.join("..", "Contexto", "Datos de entrada", "Test1.txt"),
         os.path.join("..", "Contexto", "Datos de entrada", "Test2.txt"),
-        os.path.join("..", "Contexto", "Datos de entrada", "Test3.txt")
+        os.path.join("..", "Contexto", "Datos de entrada", "Test3.txt"),
+        os.path.join("..", "Contexto", "Datos de entrada", "Test4.txt"),
+        os.path.join("..", "Contexto", "Datos de entrada", "Test5.txt"),
+        os.path.join("..", "Contexto", "Datos de entrada", "Test6.txt")
+
     ]
     
     # Variables para recopilar tiempos

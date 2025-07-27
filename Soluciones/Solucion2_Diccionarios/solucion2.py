@@ -9,6 +9,9 @@ Autor: Proyecto ADA I - Universidad del Valle
 import sys
 import os
 
+# Aumentar límite de recursión para manejar archivos grandes
+sys.setrecursionlimit(15000)
+
 # ----------------- CLASES PARA EL ÁRBOL BINARIO DE BÚSQUEDA -----------------
 class NodoArbol:
     """Nodo para Árbol Binario de Búsqueda"""
@@ -206,7 +209,7 @@ def calcular_estadisticas_tema(tema):
 
 # ----------------- FUNCIONES PARA ORDENAMIENTO CON ÁRBOL BINARIO DE BÚSQUEDA -----------------
 def calcular_mediana_con_bst(opiniones_dict):
-    """Calcula mediana usando BST sin convertir a lista"""
+    """Calcula mediana usando BST"""
     if len(opiniones_dict) == 0:
         return 0
     
@@ -256,7 +259,10 @@ def bst_encuestados_pregunta(encuestados_dict):
         if enc_a['opinion'] > enc_b['opinion']:
             return True
         elif enc_a['opinion'] == enc_b['opinion']:
-            return enc_a['experticia'] > enc_b['experticia']
+            if enc_a['experticia'] > enc_b['experticia']:
+                return True
+            elif enc_a['experticia'] == enc_b['experticia']:
+                return enc_a['id'] < enc_b['id']  # Desempate por ID ascendente
         return False
     
     arbol = ArbolBST(comparar_encuestados)
@@ -539,7 +545,7 @@ def procesar_encuesta(ruta_archivo):
     
     # Mayor consenso
     max_cons, max_tema_cons, max_preg_cons = encontrar_pregunta_extrema(temas, "consenso", True)
-    resultado += f"  Pregunta con mayor consenso: [{max_cons:.2f}] Pregunta: {max_tema_cons}.{max_preg_cons}\n"
+    resultado += f"  Pregunta con mayor consenso: [{max_cons:.2g}] Pregunta: {max_tema_cons}.{max_preg_cons}\n"
     
     resultado += "\n"
     
